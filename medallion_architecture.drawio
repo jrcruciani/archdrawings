@@ -1,0 +1,274 @@
+<mxfile host="app.diagrams.net" modified="2026-02-19T00:00:00.000Z" agent="Claude" version="21.0.0" type="github">
+  <diagram name="Medallion Architecture - Azure Databricks" id="medallion-azure-databricks">
+    <mxGraphModel dx="1422" dy="762" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1900" pageHeight="1100" math="0" shadow="1">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <!-- Title -->
+        <mxCell id="title" value="Medallion Architecture — Azure Databricks" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=22;fontStyle=1;fontColor=#1a1a2e;" vertex="1" parent="1">
+          <mxGeometry x="350" y="20" width="1200" height="50" as="geometry" />
+        </mxCell>
+
+        <!-- ===== DATA SOURCES ===== -->
+        <mxCell id="sources_bg" value="Data Sources" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f0f4ff;strokeColor=#6c8ebf;fontSize=13;fontStyle=1;verticalAlign=top;arcSize=5;" vertex="1" parent="1">
+          <mxGeometry x="40" y="100" width="200" height="800" as="geometry" />
+        </mxCell>
+
+        <mxCell id="src1" value="Relational DB&#xa;(Azure SQL / PostgreSQL)" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="60" y="160" width="160" height="80" as="geometry" />
+        </mxCell>
+
+        <mxCell id="src2" value="Streaming&#xa;(Azure Event Hubs / IoT Hub)" style="shape=mxgraph.azure2.event_hubs;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=11;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="60" y="280" width="160" height="80" as="geometry" />
+        </mxCell>
+
+        <mxCell id="src3" value="Files&#xa;(Blob Storage / ADLS Gen2)" style="shape=mxgraph.azure2.storage_blob;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=11;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="60" y="400" width="160" height="80" as="geometry" />
+        </mxCell>
+
+        <mxCell id="src4" value="SaaS / APIs&#xa;(REST / 3rd Party)" style="shape=mxgraph.azure2.api_management;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=11;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="60" y="520" width="160" height="80" as="geometry" />
+        </mxCell>
+
+        <mxCell id="src5" value="Legacy / On-Prem&#xa;(ADF / SHIR)" style="shape=mxgraph.azure2.azure_data_factory;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=11;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="60" y="640" width="160" height="80" as="geometry" />
+        </mxCell>
+
+        <!-- ===== INGESTION ===== -->
+        <mxCell id="ingest_bg" value="Ingestion" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff9e6;strokeColor=#d6b656;fontSize=13;fontStyle=1;verticalAlign=top;arcSize=5;" vertex="1" parent="1">
+          <mxGeometry x="280" y="100" width="200" height="800" as="geometry" />
+        </mxCell>
+
+        <mxCell id="adf" value="Azure Data Factory&#xa;(Batch / CDC)" style="shape=mxgraph.azure2.azure_data_factory;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=11;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="300" y="200" width="160" height="80" as="geometry" />
+        </mxCell>
+
+        <mxCell id="eventhub" value="Azure Event Hubs&#xa;(Streaming)" style="shape=mxgraph.azure2.event_hubs;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=11;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="300" y="360" width="160" height="80" as="geometry" />
+        </mxCell>
+
+        <mxCell id="autoloader" value="Databricks&#xa;Auto Loader" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=11;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="300" y="520" width="160" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- ===== ADLS GEN2 ===== -->
+        <mxCell id="adls_bg" value="Azure Data Lake Storage Gen2&#xa;(Delta Lake)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e8f5e9;strokeColor=#82b366;fontSize=12;fontStyle=1;verticalAlign=top;arcSize=5;" vertex="1" parent="1">
+          <mxGeometry x="520" y="100" width="860" height="800" as="geometry" />
+        </mxCell>
+
+        <!-- BRONZE LAYER -->
+        <mxCell id="bronze_bg" value="🥉 BRONZE LAYER — Raw / Ingestion Zone" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fde8d8;strokeColor=#c97a2a;fontSize=13;fontStyle=1;verticalAlign=top;arcSize=5;" vertex="1" parent="1">
+          <mxGeometry x="540" y="140" width="800" height="200" as="geometry" />
+        </mxCell>
+
+        <mxCell id="bronze_delta" value="Delta Tables&#xa;(Raw — as-is)" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;fillColor=#f8cecc;strokeColor=#b85450;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="570" y="210" width="140" height="80" as="geometry" />
+        </mxCell>
+
+        <mxCell id="bronze_checkpoint" value="Checkpoints&#xa;&amp; Metadata" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="740" y="210" width="140" height="80" as="geometry" />
+        </mxCell>
+
+        <mxCell id="bronze_schema" value="Schema&#xa;Evolution&#xa;(CloudFiles)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="910" y="210" width="130" height="80" as="geometry" />
+        </mxCell>
+
+        <mxCell id="bronze_note" value="• No transformations&#xa;• Append-only&#xa;• Full audit trail" style="text;html=1;strokeColor=none;fillColor=#fde8d8;align=left;verticalAlign=middle;whiteSpace=wrap;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="1070" y="200" width="240" height="80" as="geometry" />
+        </mxCell>
+
+        <!-- SILVER LAYER -->
+        <mxCell id="silver_bg" value="🥈 SILVER LAYER — Cleansed / Conformed Zone" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e8e8f8;strokeColor=#6860a8;fontSize=13;fontStyle=1;verticalAlign=top;arcSize=5;" vertex="1" parent="1">
+          <mxGeometry x="540" y="370" width="800" height="200" as="geometry" />
+        </mxCell>
+
+        <mxCell id="silver_delta" value="Delta Tables&#xa;(Cleansed)" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;fillColor=#d5c8f0;strokeColor=#6860a8;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="570" y="440" width="140" height="80" as="geometry" />
+        </mxCell>
+
+        <mxCell id="silver_merge" value="MERGE / UPSERT&#xa;(SCD Type 1/2)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5c8f0;strokeColor=#6860a8;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="740" y="440" width="140" height="80" as="geometry" />
+        </mxCell>
+
+        <mxCell id="silver_dq" value="Data Quality&#xa;(Great Expectations&#xa;/ Databricks DQ)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5c8f0;strokeColor=#6860a8;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="910" y="440" width="130" height="80" as="geometry" />
+        </mxCell>
+
+        <mxCell id="silver_note" value="• Dedup &amp; null handling&#xa;• Business keys aligned&#xa;• Enrichment joins&#xa;• PII masking" style="text;html=1;strokeColor=none;fillColor=#e8e8f8;align=left;verticalAlign=middle;whiteSpace=wrap;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="1070" y="430" width="240" height="90" as="geometry" />
+        </mxCell>
+
+        <!-- GOLD LAYER -->
+        <mxCell id="gold_bg" value="🥇 GOLD LAYER — Curated / Business Zone" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fef9d4;strokeColor=#c7a800;fontSize=13;fontStyle=1;verticalAlign=top;arcSize=5;" vertex="1" parent="1">
+          <mxGeometry x="540" y="600" width="800" height="200" as="geometry" />
+        </mxCell>
+
+        <mxCell id="gold_delta" value="Delta Tables&#xa;(Aggregated)" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;fillColor=#ffec9e;strokeColor=#c7a800;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="570" y="670" width="140" height="80" as="geometry" />
+        </mxCell>
+
+        <mxCell id="gold_star" value="Star Schema&#xa;/ Data Mart" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffec9e;strokeColor=#c7a800;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="740" y="670" width="140" height="80" as="geometry" />
+        </mxCell>
+
+        <mxCell id="gold_feature" value="Feature Store&#xa;/ ML-ready&#xa;Datasets" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffec9e;strokeColor=#c7a800;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="910" y="670" width="130" height="80" as="geometry" />
+        </mxCell>
+
+        <mxCell id="gold_note" value="• Aggregations &amp; KPIs&#xa;• Domain-specific tables&#xa;• Optimized for BI&#xa;• Partitioned &amp; Z-ordered" style="text;html=1;strokeColor=none;fillColor=#fef9d4;align=left;verticalAlign=middle;whiteSpace=wrap;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="1070" y="660" width="240" height="90" as="geometry" />
+        </mxCell>
+
+        <!-- ===== DATABRICKS PLATFORM ===== -->
+        <mxCell id="db_bg" value="Azure Databricks Platform" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1f0fa;strokeColor=#0078d4;fontSize=13;fontStyle=1;verticalAlign=top;arcSize=5;" vertex="1" parent="1">
+          <mxGeometry x="1420" y="100" width="220" height="500" as="geometry" />
+        </mxCell>
+
+        <mxCell id="db_jobs" value="Databricks Jobs&#xa;(Orchestration)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#bdd7ee;strokeColor=#0078d4;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="1440" y="160" width="180" height="60" as="geometry" />
+        </mxCell>
+
+        <mxCell id="db_delta" value="Delta Live Tables&#xa;(DLT Pipelines)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#bdd7ee;strokeColor=#0078d4;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="1440" y="250" width="180" height="60" as="geometry" />
+        </mxCell>
+
+        <mxCell id="db_uc" value="Unity Catalog&#xa;(Governance)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#bdd7ee;strokeColor=#0078d4;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="1440" y="340" width="180" height="60" as="geometry" />
+        </mxCell>
+
+        <mxCell id="db_ml" value="MLflow / Model Serving&#xa;(ML &amp; AI)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#bdd7ee;strokeColor=#0078d4;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="1440" y="430" width="180" height="60" as="geometry" />
+        </mxCell>
+
+        <mxCell id="db_sql" value="Databricks SQL&#xa;(Query Engine)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#bdd7ee;strokeColor=#0078d4;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="1440" y="520" width="180" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- ===== CONSUMPTION LAYER ===== -->
+        <mxCell id="consume_bg" value="Consumption" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f3e8ff;strokeColor=#9c27b0;fontSize=13;fontStyle=1;verticalAlign=top;arcSize=5;" vertex="1" parent="1">
+          <mxGeometry x="1680" y="100" width="200" height="800" as="geometry" />
+        </mxCell>
+
+        <mxCell id="pbi" value="Power BI&#xa;/ Tableau" style="shape=mxgraph.azure2.powerbi;fillColor=#e1bee7;strokeColor=#9c27b0;fontSize=11;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="1700" y="160" width="160" height="80" as="geometry" />
+        </mxCell>
+
+        <mxCell id="synapse" value="Azure Synapse&#xa;Analytics" style="shape=mxgraph.azure2.synapse_analytics;fillColor=#e1bee7;strokeColor=#9c27b0;fontSize=11;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="1700" y="280" width="160" height="80" as="geometry" />
+        </mxCell>
+
+        <mxCell id="ml_consume" value="ML Models&#xa;/ AI Apps" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1bee7;strokeColor=#9c27b0;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="1700" y="400" width="160" height="70" as="geometry" />
+        </mxCell>
+
+        <mxCell id="api_consume" value="REST APIs&#xa;/ Microservices" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1bee7;strokeColor=#9c27b0;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="1700" y="510" width="160" height="70" as="geometry" />
+        </mxCell>
+
+        <mxCell id="notebook_consume" value="Notebooks&#xa;/ Ad-hoc Analysis" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1bee7;strokeColor=#9c27b0;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="1700" y="620" width="160" height="70" as="geometry" />
+        </mxCell>
+
+        <!-- ===== CROSS-CUTTING: Monitoring ===== -->
+        <mxCell id="monitor_bg" value="Monitoring &amp; Observability" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fce4ec;strokeColor=#c62828;fontSize=12;fontStyle=1;verticalAlign=top;arcSize=5;" vertex="1" parent="1">
+          <mxGeometry x="280" y="940" width="1400" height="70" as="geometry" />
+        </mxCell>
+
+        <mxCell id="monitor1" value="Azure Monitor" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffcdd2;strokeColor=#c62828;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="310" y="965" width="140" height="35" as="geometry" />
+        </mxCell>
+
+        <mxCell id="monitor2" value="Databricks Lakehouse Monitoring" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffcdd2;strokeColor=#c62828;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="480" y="965" width="200" height="35" as="geometry" />
+        </mxCell>
+
+        <mxCell id="monitor3" value="Azure Log Analytics" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffcdd2;strokeColor=#c62828;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="710" y="965" width="160" height="35" as="geometry" />
+        </mxCell>
+
+        <mxCell id="monitor4" value="Data Quality Alerts" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffcdd2;strokeColor=#c62828;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="900" y="965" width="150" height="35" as="geometry" />
+        </mxCell>
+
+        <mxCell id="monitor5" value="Lineage (Unity Catalog)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffcdd2;strokeColor=#c62828;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="1080" y="965" width="160" height="35" as="geometry" />
+        </mxCell>
+
+        <mxCell id="monitor6" value="Cost Management" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffcdd2;strokeColor=#c62828;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="1270" y="965" width="140" height="35" as="geometry" />
+        </mxCell>
+
+        <mxCell id="monitor7" value="CI/CD (Azure DevOps / GitHub Actions)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffcdd2;strokeColor=#c62828;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="1440" y="965" width="220" height="35" as="geometry" />
+        </mxCell>
+
+        <!-- ===== ARROWS — Sources to Ingestion ===== -->
+        <mxCell id="e1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;strokeColor=#6c8ebf;strokeWidth=2;" edge="1" source="src1" target="adf" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;strokeColor=#6c8ebf;strokeWidth=2;" edge="1" source="src2" target="eventhub" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;strokeColor=#6c8ebf;strokeWidth=2;" edge="1" source="src3" target="autoloader" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;strokeColor=#6c8ebf;strokeWidth=2;" edge="1" source="src4" target="autoloader" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;strokeColor=#6c8ebf;strokeWidth=2;" edge="1" source="src5" target="adf" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Ingestion to Bronze -->
+        <mxCell id="e6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;strokeColor=#c97a2a;strokeWidth=2.5;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" source="adf" target="bronze_delta" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e7" style="edgeStyle=orthogonalEdgeStyle;rounded=0;strokeColor=#c97a2a;strokeWidth=2.5;" edge="1" source="eventhub" target="bronze_delta" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;strokeColor=#c97a2a;strokeWidth=2.5;" edge="1" source="autoloader" target="bronze_delta" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Bronze to Silver -->
+        <mxCell id="e9" value="Transform&#xa;&amp; Cleanse" style="edgeStyle=orthogonalEdgeStyle;rounded=0;strokeColor=#6860a8;strokeWidth=2.5;fontStyle=2;fontSize=10;" edge="1" source="bronze_delta" target="silver_delta" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Silver to Gold -->
+        <mxCell id="e10" value="Aggregate&#xa;&amp; Model" style="edgeStyle=orthogonalEdgeStyle;rounded=0;strokeColor=#c7a800;strokeWidth=2.5;fontStyle=2;fontSize=10;" edge="1" source="silver_delta" target="gold_delta" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Gold to Databricks -->
+        <mxCell id="e11" style="edgeStyle=orthogonalEdgeStyle;rounded=0;strokeColor=#0078d4;strokeWidth=2;dashed=1;" edge="1" source="gold_delta" target="db_sql" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Databricks to Consumption -->
+        <mxCell id="e12" style="edgeStyle=orthogonalEdgeStyle;rounded=0;strokeColor=#9c27b0;strokeWidth=2.5;" edge="1" source="db_sql" target="pbi" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e13" style="edgeStyle=orthogonalEdgeStyle;rounded=0;strokeColor=#9c27b0;strokeWidth=2.5;" edge="1" source="db_sql" target="synapse" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e14" style="edgeStyle=orthogonalEdgeStyle;rounded=0;strokeColor=#9c27b0;strokeWidth=2.5;" edge="1" source="db_ml" target="ml_consume" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e15" style="edgeStyle=orthogonalEdgeStyle;rounded=0;strokeColor=#9c27b0;strokeWidth=2.5;" edge="1" source="db_sql" target="api_consume" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- DLT orchestrating layers -->
+        <mxCell id="e16" style="edgeStyle=orthogonalEdgeStyle;rounded=0;strokeColor=#0078d4;strokeWidth=1.5;dashed=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" source="db_delta" target="silver_delta" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e17" style="edgeStyle=orthogonalEdgeStyle;rounded=0;strokeColor=#0078d4;strokeWidth=1.5;dashed=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" source="db_delta" target="gold_delta" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
