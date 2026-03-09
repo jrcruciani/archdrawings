@@ -73,11 +73,8 @@
 
         <!-- Azure Data Factory -->
         <mxCell id="12" value="Azure Data Factory&#xa;(CDC Pipeline)"
-                style="outlineConnect=0;fontColor=#232F3E;gradientColor=none;
-                       fillColor=#0078D4;strokeColor=none;dashed=0;
-                       shape=mxgraph.azure2.analytics.data_factory;
-                       align=center;html=1;fontSize=10;fontStyle=0;
-                       aspect=fixed;pointerEvents=1;
+                style="image;aspect=fixed;html=1;points=[];align=center;fontSize=10;
+                       image=img/lib/azure2/databases/Data_Factory.svg;
                        verticalLabelPosition=bottom;verticalAlign=top;"
                 vertex="1" parent="1">
           <mxGeometry x="480" y="270" width="50" height="50" as="geometry"/>
@@ -85,11 +82,8 @@
 
         <!-- Azure Cosmos DB -->
         <mxCell id="13" value="Azure Cosmos DB&#xa;for MongoDB (vCore)"
-                style="outlineConnect=0;fontColor=#232F3E;gradientColor=none;
-                       fillColor=#0078D4;strokeColor=none;dashed=0;
-                       shape=mxgraph.azure2.databases.cosmos_db;
-                       align=center;html=1;fontSize=10;fontStyle=0;
-                       aspect=fixed;pointerEvents=1;
+                style="image;aspect=fixed;html=1;points=[];align=center;fontSize=10;
+                       image=img/lib/azure2/databases/Azure_Cosmos_DB.svg;
                        verticalLabelPosition=bottom;verticalAlign=top;"
                 vertex="1" parent="1">
           <mxGeometry x="700" y="270" width="50" height="50" as="geometry"/>
@@ -97,11 +91,8 @@
 
         <!-- Fabric Lakehouse -->
         <mxCell id="14" value="Fabric Lakehouse&#xa;(OneLake / Delta)"
-                style="outlineConnect=0;fontColor=#232F3E;gradientColor=none;
-                       fillColor=#0078D4;strokeColor=none;dashed=0;
-                       shape=mxgraph.azure2.storage.data_lake_storage;
-                       align=center;html=1;fontSize=10;fontStyle=0;
-                       aspect=fixed;pointerEvents=1;
+                style="image;aspect=fixed;html=1;points=[];align=center;fontSize=10;
+                       image=img/lib/azure2/databases/Azure_Data_Explorer_Clusters.svg;
                        verticalLabelPosition=bottom;verticalAlign=top;"
                 vertex="1" parent="1">
           <mxGeometry x="940" y="260" width="50" height="50" as="geometry"/>
@@ -109,11 +100,8 @@
 
         <!-- Power BI -->
         <mxCell id="15" value="Power BI&#xa;(Dashboards &amp; Reports)"
-                style="outlineConnect=0;fontColor=#232F3E;gradientColor=none;
-                       fillColor=#0078D4;strokeColor=none;dashed=0;
-                       shape=mxgraph.azure2.analytics.power_bi_embedded;
-                       align=center;html=1;fontSize=10;fontStyle=0;
-                       aspect=fixed;pointerEvents=1;
+                style="image;aspect=fixed;html=1;points=[];align=center;fontSize=10;
+                       image=img/lib/azure2/analytics/Power_BI_Embedded.svg;
                        verticalLabelPosition=bottom;verticalAlign=top;"
                 vertex="1" parent="1">
           <mxGeometry x="1150" y="260" width="50" height="50" as="geometry"/>
@@ -123,11 +111,8 @@
 
         <!-- Key Vault -->
         <mxCell id="16" value="Key Vault"
-                style="outlineConnect=0;fontColor=#232F3E;gradientColor=none;
-                       fillColor=#0078D4;strokeColor=none;dashed=0;
-                       shape=mxgraph.azure2.security.key_vaults;
-                       align=center;html=1;fontSize=9;fontStyle=0;
-                       aspect=fixed;pointerEvents=1;
+                style="image;aspect=fixed;html=1;points=[];align=center;fontSize=9;
+                       image=img/lib/azure2/security/Key_Vaults.svg;
                        verticalLabelPosition=bottom;verticalAlign=top;"
                 vertex="1" parent="1">
           <mxGeometry x="475" y="530" width="35" height="35" as="geometry"/>
@@ -135,11 +120,8 @@
 
         <!-- Azure Monitor -->
         <mxCell id="17" value="Azure Monitor"
-                style="outlineConnect=0;fontColor=#232F3E;gradientColor=none;
-                       fillColor=#0078D4;strokeColor=none;dashed=0;
-                       shape=mxgraph.azure2.management_governance.azure_monitor;
-                       align=center;html=1;fontSize=9;fontStyle=0;
-                       aspect=fixed;pointerEvents=1;
+                style="image;aspect=fixed;html=1;points=[];align=center;fontSize=9;
+                       image=img/lib/azure2/management_governance/Monitor.svg;
                        verticalLabelPosition=bottom;verticalAlign=top;"
                 vertex="1" parent="1">
           <mxGeometry x="625" y="530" width="35" height="35" as="geometry"/>
@@ -147,11 +129,8 @@
 
         <!-- Entra ID -->
         <mxCell id="18" value="Entra ID"
-                style="outlineConnect=0;fontColor=#232F3E;gradientColor=none;
-                       fillColor=#0078D4;strokeColor=none;dashed=0;
-                       shape=mxgraph.azure2.identity.azure_active_directory;
-                       align=center;html=1;fontSize=9;fontStyle=0;
-                       aspect=fixed;pointerEvents=1;
+                style="image;aspect=fixed;html=1;points=[];align=center;fontSize=9;
+                       image=img/lib/azure2/identity/Azure_Active_Directory.svg;
                        verticalLabelPosition=bottom;verticalAlign=top;"
                 vertex="1" parent="1">
           <mxGeometry x="780" y="530" width="35" height="35" as="geometry"/>
