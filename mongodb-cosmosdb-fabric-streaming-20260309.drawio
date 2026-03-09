@@ -1,0 +1,374 @@
+<mxfile host="diagrams.net">
+  <diagram name="MongoDB to Cosmos DB + Fabric" id="ARCH-001">
+    <mxGraphModel dx="1422" dy="762" grid="1" gridSize="10" guides="1"
+                  tooltips="1" connect="1" arrows="1" fold="1" page="1"
+                  pageScale="1" pageWidth="1654" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+
+        <!-- ===== ON-PREMISES GROUP ===== -->
+        <mxCell id="2" value="On-premises"
+                style="rounded=1;whiteSpace=wrap;html=1;dashed=1;dashPattern=5 5;
+                       fillColor=none;strokeColor=#B0B0B0;strokeWidth=1.5;
+                       verticalAlign=top;align=left;spacingLeft=12;spacingTop=8;
+                       fontSize=12;fontColor=#505050;fontStyle=1;arcSize=4;"
+                vertex="1" parent="1">
+          <mxGeometry x="40" y="130" width="170" height="340" as="geometry"/>
+        </mxCell>
+
+        <!-- MongoDB -->
+        <mxCell id="3" value="MongoDB"
+                style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;
+                       fillColor=#47A248;strokeColor=#389428;fontColor=#505050;
+                       size=15;fontSize=10;
+                       verticalLabelPosition=bottom;verticalAlign=top;"
+                vertex="1" parent="2">
+          <mxGeometry x="55" y="50" width="50" height="55" as="geometry"/>
+        </mxCell>
+
+        <!-- Self-Hosted Integration Runtime -->
+        <mxCell id="4" value="Self-Hosted&#xa;Integration Runtime"
+                style="aspect=fixed;html=1;align=center;
+                       image;fontSize=9;fontColor=#505050;
+                       image=img/lib/azure2/compute/Virtual_Machine.svg;
+                       verticalLabelPosition=bottom;verticalAlign=top;"
+                vertex="1" parent="2">
+          <mxGeometry x="55" y="195" width="50" height="50" as="geometry"/>
+        </mxCell>
+
+        <!-- ===== CONNECTIVITY ===== -->
+        <mxCell id="5" value="ExpressRoute /&#xa;VPN Gateway"
+                style="aspect=fixed;html=1;align=center;
+                       image;fontSize=9;fontColor=#505050;
+                       image=img/lib/azure2/networking/ExpressRoute_Circuits.svg;
+                       verticalLabelPosition=bottom;verticalAlign=top;"
+                vertex="1" parent="1">
+          <mxGeometry x="270" y="290" width="50" height="50" as="geometry"/>
+        </mxCell>
+
+        <!-- ===== INGEST GROUP ===== -->
+        <mxCell id="6" value="Ingest"
+                style="rounded=1;whiteSpace=wrap;html=1;dashed=1;dashPattern=5 5;
+                       fillColor=none;strokeColor=#B0B0B0;strokeWidth=1.5;
+                       verticalAlign=top;align=left;spacingLeft=12;spacingTop=8;
+                       fontSize=12;fontColor=#505050;fontStyle=1;arcSize=4;"
+                vertex="1" parent="1">
+          <mxGeometry x="380" y="130" width="230" height="340" as="geometry"/>
+        </mxCell>
+
+        <!-- Azure Data Factory -->
+        <mxCell id="7" value="Azure Data Factory&#xa;(batch / CDC)"
+                style="aspect=fixed;html=1;align=center;
+                       image;fontSize=9;fontColor=#505050;
+                       image=img/lib/azure2/databases/Data_Factory.svg;
+                       verticalLabelPosition=bottom;verticalAlign=top;"
+                vertex="1" parent="6">
+          <mxGeometry x="90" y="50" width="50" height="50" as="geometry"/>
+        </mxCell>
+
+        <!-- Event Hubs -->
+        <mxCell id="8" value="Event Hubs&#xa;(real-time stream)"
+                style="aspect=fixed;html=1;align=center;
+                       image;fontSize=9;fontColor=#505050;
+                       image=img/lib/azure2/analytics/Event_Hubs.svg;
+                       verticalLabelPosition=bottom;verticalAlign=top;"
+                vertex="1" parent="6">
+          <mxGeometry x="25" y="195" width="50" height="50" as="geometry"/>
+        </mxCell>
+
+        <!-- Azure Functions -->
+        <mxCell id="9" value="Azure Functions&#xa;(event processor)"
+                style="aspect=fixed;html=1;align=center;
+                       image;fontSize=9;fontColor=#505050;
+                       image=img/lib/azure2/compute/Function_Apps.svg;
+                       verticalLabelPosition=bottom;verticalAlign=top;"
+                vertex="1" parent="6">
+          <mxGeometry x="140" y="195" width="50" height="50" as="geometry"/>
+        </mxCell>
+
+        <!-- ===== COSMOS DB (focal service) ===== -->
+        <mxCell id="10" value="Azure Cosmos DB&#xa;for MongoDB (vCore)"
+                style="aspect=fixed;html=1;align=center;
+                       image;fontSize=10;fontColor=#505050;fontStyle=1;
+                       image=img/lib/azure2/databases/Azure_Cosmos_DB.svg;
+                       verticalLabelPosition=bottom;verticalAlign=top;"
+                vertex="1" parent="1">
+          <mxGeometry x="680" y="265" width="60" height="60" as="geometry"/>
+        </mxCell>
+
+        <!-- ===== MICROSOFT FABRIC GROUP ===== -->
+        <mxCell id="11" value="Microsoft Fabric"
+                style="rounded=1;whiteSpace=wrap;html=1;dashed=1;dashPattern=5 5;
+                       fillColor=none;strokeColor=#B0B0B0;strokeWidth=1.5;
+                       verticalAlign=top;align=left;spacingLeft=12;spacingTop=8;
+                       fontSize=12;fontColor=#505050;fontStyle=1;arcSize=4;"
+                vertex="1" parent="1">
+          <mxGeometry x="820" y="130" width="230" height="390" as="geometry"/>
+        </mxCell>
+
+        <!-- Fabric Lakehouse -->
+        <mxCell id="12" value="Lakehouse&#xa;(Bronze / Silver)"
+                style="rounded=1;whiteSpace=wrap;html=1;
+                       fillColor=#FEF0E7;strokeColor=#E8712B;strokeWidth=1.5;
+                       fontColor=#333333;fontSize=10;fontStyle=1;arcSize=8;"
+                vertex="1" parent="11">
+          <mxGeometry x="65" y="55" width="100" height="50" as="geometry"/>
+        </mxCell>
+
+        <!-- Fabric Data Pipelines -->
+        <mxCell id="13" value="Data Pipelines&#xa;(transform)"
+                style="rounded=1;whiteSpace=wrap;html=1;
+                       fillColor=#FEF0E7;strokeColor=#E8712B;strokeWidth=1.5;
+                       fontColor=#333333;fontSize=10;fontStyle=1;arcSize=8;"
+                vertex="1" parent="11">
+          <mxGeometry x="65" y="160" width="100" height="50" as="geometry"/>
+        </mxCell>
+
+        <!-- SQL Analytics Endpoint -->
+        <mxCell id="14" value="SQL Analytics&#xa;Endpoint (Gold)"
+                style="rounded=1;whiteSpace=wrap;html=1;
+                       fillColor=#FEF0E7;strokeColor=#E8712B;strokeWidth=1.5;
+                       fontColor=#333333;fontSize=10;fontStyle=1;arcSize=8;"
+                vertex="1" parent="11">
+          <mxGeometry x="65" y="270" width="100" height="50" as="geometry"/>
+        </mxCell>
+
+        <!-- ===== POWER BI ===== -->
+        <mxCell id="15" value="Power BI"
+                style="aspect=fixed;html=1;align=center;
+                       image;fontSize=10;fontColor=#505050;fontStyle=1;
+                       image=img/lib/azure2/analytics/Power_BI.svg;
+                       verticalLabelPosition=bottom;verticalAlign=top;"
+                vertex="1" parent="1">
+          <mxGeometry x="1130" y="375" width="60" height="60" as="geometry"/>
+        </mxCell>
+
+        <!-- ===== PLATFORM SERVICES BAR ===== -->
+        <mxCell id="16" value="Platform services"
+                style="rounded=1;whiteSpace=wrap;html=1;
+                       fillColor=#F5F5F5;strokeColor=#D0D0D0;strokeWidth=1;
+                       verticalAlign=top;align=left;spacingLeft=12;spacingTop=5;
+                       fontSize=11;fontColor=#505050;fontStyle=1;arcSize=2;"
+                vertex="1" parent="1">
+          <mxGeometry x="40" y="590" width="1160" height="95" as="geometry"/>
+        </mxCell>
+
+        <!-- Azure Monitor -->
+        <mxCell id="17" value="Azure Monitor"
+                style="aspect=fixed;html=1;align=center;
+                       image;fontSize=8;fontColor=#505050;
+                       image=img/lib/azure2/management_governance/Monitor.svg;
+                       verticalLabelPosition=bottom;verticalAlign=top;"
+                vertex="1" parent="16">
+          <mxGeometry x="50" y="18" width="35" height="35" as="geometry"/>
+        </mxCell>
+
+        <!-- Key Vault -->
+        <mxCell id="18" value="Key Vault"
+                style="aspect=fixed;html=1;align=center;
+                       image;fontSize=8;fontColor=#505050;
+                       image=img/lib/azure2/security/Key_Vaults.svg;
+                       verticalLabelPosition=bottom;verticalAlign=top;"
+                vertex="1" parent="16">
+          <mxGeometry x="220" y="18" width="35" height="35" as="geometry"/>
+        </mxCell>
+
+        <!-- Entra ID -->
+        <mxCell id="19" value="Microsoft Entra ID"
+                style="aspect=fixed;html=1;align=center;
+                       image;fontSize=8;fontColor=#505050;
+                       image=img/lib/azure2/identity/Azure_Active_Directory.svg;
+                       verticalLabelPosition=bottom;verticalAlign=top;"
+                vertex="1" parent="16">
+          <mxGeometry x="400" y="18" width="35" height="35" as="geometry"/>
+        </mxCell>
+
+        <!-- Microsoft Purview -->
+        <mxCell id="20" value="Microsoft Purview"
+                style="aspect=fixed;html=1;align=center;
+                       image;fontSize=8;fontColor=#505050;
+                       image=img/lib/azure2/governance/Purview_Accounts.svg;
+                       verticalLabelPosition=bottom;verticalAlign=top;"
+                vertex="1" parent="16">
+          <mxGeometry x="590" y="18" width="35" height="35" as="geometry"/>
+        </mxCell>
+
+        <!-- Log Analytics -->
+        <mxCell id="21" value="Log Analytics"
+                style="aspect=fixed;html=1;align=center;
+                       image;fontSize=8;fontColor=#505050;
+                       image=img/lib/azure2/analytics/Log_Analytics_Workspaces.svg;
+                       verticalLabelPosition=bottom;verticalAlign=top;"
+                vertex="1" parent="16">
+          <mxGeometry x="780" y="18" width="35" height="35" as="geometry"/>
+        </mxCell>
+
+        <!-- Cost Management -->
+        <mxCell id="22" value="Cost Management"
+                style="aspect=fixed;html=1;align=center;
+                       image;fontSize=8;fontColor=#505050;
+                       image=img/lib/azure2/management_governance/Cost_Management.svg;
+                       verticalLabelPosition=bottom;verticalAlign=top;"
+                vertex="1" parent="16">
+          <mxGeometry x="970" y="18" width="35" height="35" as="geometry"/>
+        </mxCell>
+
+        <!-- ===== CONNECTIONS ===== -->
+
+        <!-- MongoDB → SHIR -->
+        <mxCell id="30" value=""
+                style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;
+                       jettySize=auto;html=1;strokeColor=#404040;strokeWidth=1.5;"
+                edge="1" source="3" target="4" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- SHIR → ExpressRoute -->
+        <mxCell id="31" value=""
+                style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;
+                       jettySize=auto;html=1;strokeColor=#404040;strokeWidth=1.5;"
+                edge="1" source="4" target="5" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- ExpressRoute → ADF -->
+        <mxCell id="32" value=""
+                style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;
+                       jettySize=auto;html=1;strokeColor=#404040;strokeWidth=1.5;"
+                edge="1" source="5" target="7" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- ExpressRoute → Event Hubs -->
+        <mxCell id="33" value=""
+                style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;
+                       jettySize=auto;html=1;strokeColor=#404040;strokeWidth=1.5;"
+                edge="1" source="5" target="8" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- ADF → Cosmos DB (batch) -->
+        <mxCell id="34" value="Batch load"
+                style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;
+                       jettySize=auto;html=1;strokeColor=#404040;strokeWidth=1.5;
+                       fontSize=9;fontColor=#606060;"
+                edge="1" source="7" target="10" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- Event Hubs → Azure Functions -->
+        <mxCell id="35" value=""
+                style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;
+                       jettySize=auto;html=1;strokeColor=#404040;strokeWidth=1.5;"
+                edge="1" source="8" target="9" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- Azure Functions → Cosmos DB (stream) -->
+        <mxCell id="36" value="Stream write"
+                style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;
+                       jettySize=auto;html=1;strokeColor=#404040;strokeWidth=1.5;
+                       fontSize=9;fontColor=#606060;"
+                edge="1" source="9" target="10" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- Cosmos DB → Fabric Lakehouse (mirroring) -->
+        <mxCell id="37" value="Mirroring"
+                style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;
+                       jettySize=auto;html=1;strokeColor=#404040;strokeWidth=1.5;
+                       fontSize=9;fontColor=#606060;"
+                edge="1" source="10" target="12" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- Lakehouse → Data Pipelines -->
+        <mxCell id="38" value=""
+                style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;
+                       jettySize=auto;html=1;strokeColor=#404040;strokeWidth=1.5;
+                       exitX=0.5;exitY=1;exitDx=0;exitDy=0;
+                       entryX=0.5;entryY=0;entryDx=0;entryDy=0;"
+                edge="1" source="12" target="13" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- Data Pipelines → SQL Analytics Endpoint -->
+        <mxCell id="39" value=""
+                style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;
+                       jettySize=auto;html=1;strokeColor=#404040;strokeWidth=1.5;
+                       exitX=0.5;exitY=1;exitDx=0;exitDy=0;
+                       entryX=0.5;entryY=0;entryDx=0;entryDy=0;"
+                edge="1" source="13" target="14" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- SQL Endpoint → Power BI -->
+        <mxCell id="40" value="DirectLake"
+                style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;
+                       jettySize=auto;html=1;strokeColor=#404040;strokeWidth=1.5;
+                       fontSize=9;fontColor=#606060;"
+                edge="1" source="14" target="15" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- ===== NUMBERED DATAFLOW ANNOTATIONS ===== -->
+
+        <!-- Step 1: SHIR reads MongoDB change data -->
+        <mxCell id="50" value="1"
+                style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;
+                       fillColor=#0078D4;strokeColor=none;fontColor=#FFFFFF;
+                       fontSize=11;fontStyle=1;"
+                vertex="1" parent="1">
+          <mxGeometry x="128" y="248" width="24" height="24" as="geometry"/>
+        </mxCell>
+
+        <!-- Step 2: Data travels via ExpressRoute/VPN -->
+        <mxCell id="51" value="2"
+                style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;
+                       fillColor=#0078D4;strokeColor=none;fontColor=#FFFFFF;
+                       fontSize=11;fontStyle=1;"
+                vertex="1" parent="1">
+          <mxGeometry x="232" y="350" width="24" height="24" as="geometry"/>
+        </mxCell>
+
+        <!-- Step 3: Dual ingestion (batch + stream) -->
+        <mxCell id="52" value="3"
+                style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;
+                       fillColor=#0078D4;strokeColor=none;fontColor=#FFFFFF;
+                       fontSize=11;fontStyle=1;"
+                vertex="1" parent="1">
+          <mxGeometry x="352" y="195" width="24" height="24" as="geometry"/>
+        </mxCell>
+
+        <!-- Step 4: Cosmos DB stores data -->
+        <mxCell id="53" value="4"
+                style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;
+                       fillColor=#0078D4;strokeColor=none;fontColor=#FFFFFF;
+                       fontSize=11;fontStyle=1;"
+                vertex="1" parent="1">
+          <mxGeometry x="648" y="248" width="24" height="24" as="geometry"/>
+        </mxCell>
+
+        <!-- Step 5: Fabric mirroring + transform -->
+        <mxCell id="54" value="5"
+                style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;
+                       fillColor=#0078D4;strokeColor=none;fontColor=#FFFFFF;
+                       fontSize=11;fontStyle=1;"
+                vertex="1" parent="1">
+          <mxGeometry x="776" y="210" width="24" height="24" as="geometry"/>
+        </mxCell>
+
+        <!-- Step 6: Power BI reporting -->
+        <mxCell id="55" value="6"
+                style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;
+                       fillColor=#0078D4;strokeColor=none;fontColor=#FFFFFF;
+                       fontSize=11;fontStyle=1;"
+                vertex="1" parent="1">
+          <mxGeometry x="1098" y="378" width="24" height="24" as="geometry"/>
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
