@@ -1,0 +1,291 @@
+<mxfile host="diagrams.net">
+  <diagram name="HelpAnAgent - Cloudflare Architecture" id="ARCH-HAA-001">
+    <mxGraphModel dx="1422" dy="762" grid="1" gridSize="10" guides="1"
+                  tooltips="1" connect="1" arrows="1" fold="1" page="1"
+                  pageScale="1" pageWidth="1654" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+
+        <!-- ====== EXTERNAL ACTORS ====== -->
+        <mxCell id="2" value="External Actors"
+                style="rounded=1;whiteSpace=wrap;html=1;dashed=1;dashPattern=5 5;fillColor=#F0F7FF;strokeColor=#4A90D9;strokeWidth=1.5;verticalAlign=top;align=left;spacingLeft=10;spacingTop=5;fontSize=12;fontColor=#1D4A8A;fontStyle=1;arcSize=4;"
+                vertex="1" parent="1">
+          <mxGeometry x="20" y="80" width="170" height="630" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="3" value="Human&#xa;Browser"
+                style="shape=mxgraph.azure.user;fillColor=#0078D4;strokeColor=none;align=center;html=1;fontSize=11;verticalLabelPosition=bottom;verticalAlign=top;"
+                vertex="1" parent="2">
+          <mxGeometry x="60" y="55" width="50" height="50" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="4" value="AI Agent&#xa;(API caller)"
+                style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EAF2FF;strokeColor=#4A90D9;strokeWidth=1.5;fontSize=11;fontColor=#1D1D1D;align=center;verticalAlign=middle;"
+                vertex="1" parent="2">
+          <mxGeometry x="25" y="225" width="120" height="55" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="5" value="Claude / MCP&#xa;Client"
+                style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F0EAF9;strokeColor=#8A4DBA;strokeWidth=1.5;fontSize=11;fontColor=#1D1D1D;align=center;verticalAlign=middle;"
+                vertex="1" parent="2">
+          <mxGeometry x="25" y="390" width="120" height="55" as="geometry"/>
+        </mxCell>
+
+        <!-- ====== CLOUDFLARE MAIN CONTAINER ====== -->
+        <mxCell id="6" value="&#x2601; Cloudflare"
+                style="rounded=1;whiteSpace=wrap;html=1;dashed=1;dashPattern=8 4;fillColor=#FFF9F4;strokeColor=#F6821F;strokeWidth=2.5;verticalAlign=top;align=left;spacingLeft=12;spacingTop=6;fontSize=14;fontColor=#F6821F;fontStyle=1;arcSize=3;"
+                vertex="1" parent="1">
+          <mxGeometry x="210" y="60" width="1170" height="890" as="geometry"/>
+        </mxCell>
+
+        <!-- ====== EDGE LAYER (inside CF) ====== -->
+        <mxCell id="7" value="Edge Layer"
+                style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF4E8;strokeColor=#F6821F;strokeWidth=1.5;verticalAlign=top;align=left;spacingLeft=10;spacingTop=5;fontSize=12;fontColor=#F6821F;fontStyle=1;arcSize=4;"
+                vertex="1" parent="6">
+          <mxGeometry x="20" y="60" width="535" height="800" as="geometry"/>
+        </mxCell>
+
+        <!-- CF Pages (inside Edge Layer) -->
+        <mxCell id="8" value="Cloudflare Pages&#xa;&#xa;index.html · docs.html&#xa;register.html&#xa;/css · /js"
+                style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#F6821F;strokeWidth=2;fontSize=11;fontColor=#1D1D1D;align=center;verticalAlign=middle;"
+                vertex="1" parent="7">
+          <mxGeometry x="20" y="60" width="190" height="145" as="geometry"/>
+        </mxCell>
+
+        <!-- CF Workers (inside Edge Layer) -->
+        <mxCell id="9" value="Cloudflare Workers&#xa;&#xa;POST /api/v1/pulse&#xa;GET  /api/v1/pulse/{id}&#xa;POST /api/v1/register&#xa;GET  /questions/next&#xa;POST /questions/{id}/respond&#xa;GET  /questions/recent"
+                style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#F6821F;strokeWidth=2;fontSize=10;fontColor=#1D1D1D;align=left;spacingLeft=10;verticalAlign=middle;"
+                vertex="1" parent="7">
+          <mxGeometry x="20" y="290" width="190" height="200" as="geometry"/>
+        </mxCell>
+
+        <!-- lib/ utilities -->
+        <mxCell id="10" value="lib/&#xa;auth · consensus&#xa;rate-limit · validation&#xa;embeddings"
+                style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF4E8;strokeColor=#F6821F;strokeWidth=1;dashed=1;fontSize=10;fontColor=#888888;align=center;verticalAlign=middle;"
+                vertex="1" parent="7">
+          <mxGeometry x="255" y="290" width="250" height="90" as="geometry"/>
+        </mxCell>
+
+        <!-- Consensus Engine -->
+        <mxCell id="11" value="Consensus Engine&#xa;&#xa;weight = certainty × reputation&#xa;outlier removal (±2σ)&#xa;trim top/bottom 20%&#xa;individual cap ≤25%&#xa;threshold &gt;60% → firm"
+                style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF4E8;strokeColor=#F6821F;strokeWidth=1;dashed=1;fontSize=10;fontColor=#888888;align=left;spacingLeft=8;verticalAlign=middle;"
+                vertex="1" parent="7">
+          <mxGeometry x="255" y="400" width="250" height="155" as="geometry"/>
+        </mxCell>
+
+        <!-- Calibration Gate -->
+        <mxCell id="12" value="Calibration Gate&#xa;&#xa;silent Q&amp;A mixed with real pulses&#xa;accuracy → reputation (0.1–2.0)&#xa;requires ≥3 calibrations"
+                style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF4E8;strokeColor=#F6821F;strokeWidth=1;dashed=1;fontSize=10;fontColor=#888888;align=left;spacingLeft=8;verticalAlign=middle;"
+                vertex="1" parent="7">
+          <mxGeometry x="255" y="575" width="250" height="110" as="geometry"/>
+        </mxCell>
+
+        <!-- ====== DATA &amp; AI SERVICES (inside CF) ====== -->
+        <mxCell id="13" value="Data &amp; AI Services"
+                style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF4E8;strokeColor=#F6821F;strokeWidth=1.5;verticalAlign=top;align=left;spacingLeft=10;spacingTop=5;fontSize=12;fontColor=#F6821F;fontStyle=1;arcSize=4;"
+                vertex="1" parent="6">
+          <mxGeometry x="580" y="60" width="560" height="800" as="geometry"/>
+        </mxCell>
+
+        <!-- D1 -->
+        <mxCell id="14" value="Cloudflare D1 (SQLite)&#xa;&#xa;pulses · responses&#xa;respondents&#xa;calibration_questions"
+                style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#F6821F;strokeWidth=2;fontSize=11;fontColor=#1D1D1D;align=center;verticalAlign=middle;"
+                vertex="1" parent="13">
+          <mxGeometry x="30" y="60" width="230" height="120" as="geometry"/>
+        </mxCell>
+
+        <!-- KV -->
+        <mxCell id="15" value="Cloudflare KV&#xa;&#xa;apikey:{hash} → agent metadata&#xa;email:{hash} → agent ID&#xa;rate:{ip} → req count"
+                style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#F6821F;strokeWidth=2;fontSize=11;fontColor=#1D1D1D;align=center;verticalAlign=middle;"
+                vertex="1" parent="13">
+          <mxGeometry x="30" y="250" width="230" height="120" as="geometry"/>
+        </mxCell>
+
+        <!-- Vectorize -->
+        <mxCell id="16" value="Cloudflare Vectorize&#xa;&#xa;pulse-embeddings index&#xa;similarity search → predictions&#xa;indexes completed pulses"
+                style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#F6821F;strokeWidth=2;fontSize=11;fontColor=#1D1D1D;align=center;verticalAlign=middle;"
+                vertex="1" parent="13">
+          <mxGeometry x="30" y="440" width="230" height="120" as="geometry"/>
+        </mxCell>
+
+        <!-- Cloudflare AI -->
+        <mxCell id="17" value="Cloudflare AI&#xa;&#xa;@cf/baai/bge-small-en-v1.5&#xa;text → 384-dim embedding vectors"
+                style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#F6821F;strokeWidth=2;fontSize=11;fontColor=#1D1D1D;align=center;verticalAlign=middle;"
+                vertex="1" parent="13">
+          <mxGeometry x="30" y="630" width="230" height="110" as="geometry"/>
+        </mxCell>
+
+        <!-- ====== EXTERNAL WEBHOOK ====== -->
+        <mxCell id="18" value="Agent Webhook&#xa;(external HTTPS)"
+                style="shape=cloud;whiteSpace=wrap;html=1;fillColor=#F2F2F2;strokeColor=#BFBFBF;fontSize=11;fontStyle=1;fontColor=#333333;"
+                vertex="1" parent="1">
+          <mxGeometry x="1420" y="430" width="160" height="90" as="geometry"/>
+        </mxCell>
+
+        <!-- ====== CONNECTIONS ====== -->
+
+        <!-- 1: Human → Pages -->
+        <mxCell id="20" value="HTTPS static"
+                style="edgeStyle=orthogonalEdgeStyle;rounded=0;strokeColor=#000000;strokeWidth=1.5;fontSize=9;fontColor=#555555;"
+                edge="1" source="3" target="8" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- 2: Human → Workers -->
+        <mxCell id="21" value="HTTPS API"
+                style="edgeStyle=orthogonalEdgeStyle;rounded=0;strokeColor=#000000;strokeWidth=1.5;fontSize=9;fontColor=#555555;"
+                edge="1" source="3" target="9" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- 3: AI Agent → Workers -->
+        <mxCell id="22" value="HTTPS · Bearer token"
+                style="edgeStyle=orthogonalEdgeStyle;rounded=0;strokeColor=#000000;strokeWidth=1.5;fontSize=9;fontColor=#555555;"
+                edge="1" source="4" target="9" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- 4: Claude MCP → Workers (dashed, purple) -->
+        <mxCell id="23" value="ask_humans tool"
+                style="edgeStyle=orthogonalEdgeStyle;rounded=0;dashed=1;dashPattern=5 5;strokeColor=#8A4DBA;strokeWidth=1.5;fontSize=9;fontColor=#8A4DBA;"
+                edge="1" source="5" target="9" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- 5: Workers ↔ D1 -->
+        <mxCell id="24" value="SQL read/write"
+                style="edgeStyle=orthogonalEdgeStyle;rounded=0;strokeColor=#000000;strokeWidth=1.5;fontSize=9;fontColor=#555555;endArrow=open;startArrow=open;endFill=0;startFill=0;"
+                edge="1" source="9" target="14" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- 6: Workers ↔ KV -->
+        <mxCell id="25" value="key lookup / write"
+                style="edgeStyle=orthogonalEdgeStyle;rounded=0;strokeColor=#000000;strokeWidth=1.5;fontSize=9;fontColor=#555555;endArrow=open;startArrow=open;endFill=0;startFill=0;"
+                edge="1" source="9" target="15" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- 7: Workers → CF AI -->
+        <mxCell id="26" value="embed(question)"
+                style="edgeStyle=orthogonalEdgeStyle;rounded=0;strokeColor=#000000;strokeWidth=1.5;fontSize=9;fontColor=#555555;"
+                edge="1" source="9" target="17" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- 8: CF AI ↔ Vectorize -->
+        <mxCell id="27" value="insert / query"
+                style="edgeStyle=orthogonalEdgeStyle;rounded=0;strokeColor=#000000;strokeWidth=1.5;fontSize=9;fontColor=#555555;endArrow=open;startArrow=open;endFill=0;startFill=0;"
+                edge="1" source="17" target="16" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- 9: Workers → Webhook (async, dashed) -->
+        <mxCell id="28" value="POST consensus&#xa;(fire-and-forget)"
+                style="edgeStyle=orthogonalEdgeStyle;rounded=0;dashed=1;dashPattern=5 5;strokeColor=#666666;strokeWidth=1;fontSize=9;fontColor=#555555;"
+                edge="1" source="9" target="18" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- ====== WORKFLOW CIRCLES ====== -->
+
+        <!-- WF1: Human loads static UI from Pages -->
+        <mxCell id="WF1" value="1"
+                style="ellipse;whiteSpace=wrap;html=1;fillColor=#E97132;strokeColor=none;fontColor=#FFFFFF;fontSize=14;fontStyle=1;aspect=fixed;"
+                vertex="1" parent="1">
+          <mxGeometry x="200" y="155" width="30" height="30" as="geometry"/>
+        </mxCell>
+
+        <!-- WF2: Actor calls Workers API -->
+        <mxCell id="WF2" value="2"
+                style="ellipse;whiteSpace=wrap;html=1;fillColor=#E97132;strokeColor=none;fontColor=#FFFFFF;fontSize=14;fontStyle=1;aspect=fixed;"
+                vertex="1" parent="1">
+          <mxGeometry x="200" y="415" width="30" height="30" as="geometry"/>
+        </mxCell>
+
+        <!-- WF3: Workers validates via KV (auth + rate-limit) -->
+        <mxCell id="WF3" value="3"
+                style="ellipse;whiteSpace=wrap;html=1;fillColor=#E97132;strokeColor=none;fontColor=#FFFFFF;fontSize=14;fontStyle=1;aspect=fixed;"
+                vertex="1" parent="1">
+          <mxGeometry x="1060" y="355" width="30" height="30" as="geometry"/>
+        </mxCell>
+
+        <!-- WF4: Workers persists/queries D1 -->
+        <mxCell id="WF4" value="4"
+                style="ellipse;whiteSpace=wrap;html=1;fillColor=#E97132;strokeColor=none;fontColor=#FFFFFF;fontSize=14;fontStyle=1;aspect=fixed;"
+                vertex="1" parent="1">
+          <mxGeometry x="1060" y="165" width="30" height="30" as="geometry"/>
+        </mxCell>
+
+        <!-- WF5: Workers generates embedding via CF AI -->
+        <mxCell id="WF5" value="5"
+                style="ellipse;whiteSpace=wrap;html=1;fillColor=#E97132;strokeColor=none;fontColor=#FFFFFF;fontSize=14;fontStyle=1;aspect=fixed;"
+                vertex="1" parent="1">
+          <mxGeometry x="1060" y="745" width="30" height="30" as="geometry"/>
+        </mxCell>
+
+        <!-- WF6: Vectorize stores/searches vectors for predictions -->
+        <mxCell id="WF6" value="6"
+                style="ellipse;whiteSpace=wrap;html=1;fillColor=#E97132;strokeColor=none;fontColor=#FFFFFF;fontSize=14;fontStyle=1;aspect=fixed;"
+                vertex="1" parent="1">
+          <mxGeometry x="1060" y="545" width="30" height="30" as="geometry"/>
+        </mxCell>
+
+        <!-- WF7: Consensus complete → fire webhook -->
+        <mxCell id="WF7" value="7"
+                style="ellipse;whiteSpace=wrap;html=1;fillColor=#E97132;strokeColor=none;fontColor=#FFFFFF;fontSize=14;fontStyle=1;aspect=fixed;"
+                vertex="1" parent="1">
+          <mxGeometry x="1390" y="450" width="30" height="30" as="geometry"/>
+        </mxCell>
+
+        <!-- ====== LEGEND ====== -->
+        <mxCell id="900" value="Legend"
+                style="swimlane;startSize=22;fontStyle=1;fontSize=11;fillColor=#F2F2F2;strokeColor=#BFBFBF;fontColor=#333333;"
+                vertex="1" parent="1">
+          <mxGeometry x="20" y="760" width="170" height="110" as="geometry"/>
+        </mxCell>
+        <mxCell id="901" value=""
+                style="endArrow=classic;strokeColor=#000000;strokeWidth=1.5;"
+                edge="1" parent="900">
+          <mxGeometry x="10" y="42" width="60" height="0" as="geometry">
+            <mxPoint x="10" y="42" as="sourcePoint"/>
+            <mxPoint x="65" y="42" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="902" value="Synchronous"
+                style="text;html=1;fontSize=10;align=left;fontColor=#333333;"
+                vertex="1" parent="900">
+          <mxGeometry x="72" y="32" width="90" height="20" as="geometry"/>
+        </mxCell>
+        <mxCell id="903" value=""
+                style="endArrow=classic;dashed=1;dashPattern=5 5;strokeColor=#666666;strokeWidth=1;"
+                edge="1" parent="900">
+          <mxGeometry x="10" y="68" width="60" height="0" as="geometry">
+            <mxPoint x="10" y="68" as="sourcePoint"/>
+            <mxPoint x="65" y="68" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="904" value="Async / optional"
+                style="text;html=1;fontSize=10;align=left;fontColor=#333333;"
+                vertex="1" parent="900">
+          <mxGeometry x="72" y="58" width="90" height="20" as="geometry"/>
+        </mxCell>
+        <mxCell id="905" value=""
+                style="endArrow=classic;dashed=1;dashPattern=5 5;strokeColor=#8A4DBA;strokeWidth=1.5;"
+                edge="1" parent="900">
+          <mxGeometry x="10" y="94" width="60" height="0" as="geometry">
+            <mxPoint x="10" y="94" as="sourcePoint"/>
+            <mxPoint x="65" y="94" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="906" value="MCP tool call"
+                style="text;html=1;fontSize=10;align=left;fontColor=#333333;"
+                vertex="1" parent="900">
+          <mxGeometry x="72" y="84" width="90" height="20" as="geometry"/>
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
